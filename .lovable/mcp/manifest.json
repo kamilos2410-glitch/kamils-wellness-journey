@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://sojvochkdndqhzacbftz.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "my-health-hub",
+      "version": "0.1.0",
+      "title": "My Health Hub"
+    },
+    "tools": [
+      {
+        "name": "get_health_overview",
+        "title": "Przegląd zdrowia",
+        "description": "Pełny przegląd: aktywny plan dietetyczny (makro na dzień treningowy i nietreningowy), aktywny plan treningowy, ostatnie wpisy kalorii z Fitatu, ostatnie pomiary, notatki i liczba zdjęć postępów.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "days": {
+              "default": 30,
+              "description": "Ile ostatnich dni uwzględnić w logach jedzenia i pomiarach.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 365
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_plans",
+        "title": "Plany diety i treningu",
+        "description": "Zwraca historię planów dietetycznych (cele makro na dni treningowe i nietreningowe, notatki dietetyczne) oraz planów treningowych z datami rozpoczęcia.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "only_active": {
+              "default": false,
+              "description": "Tylko aktualnie aktywne plany.",
+              "type": "boolean"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_food_logs",
+        "title": "Dzienne kalorie (Fitatu)",
+        "description": "Lista dziennych wpisów kalorycznych i makro (z raportów Fitatu) w wybranym zakresie dat, z oznaczeniem dni treningowych.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "from": {
+              "description": "Data od (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "to": {
+              "description": "Data do (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "include_raw": {
+              "default": false,
+              "description": "Czy dołączyć oryginalną treść wklejonego raportu.",
+              "type": "boolean"
+            },
+            "limit": {
+              "default": 90,
+              "description": "Maksymalna liczba dni.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 400
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_measurements",
+        "title": "Pomiary ciała",
+        "description": "Pomiary (waga, obwody, inne metryki) w wybranym zakresie dat, posortowane od najnowszych.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "metric": {
+              "description": "Filtr metryki, np. 'waga'.",
+              "type": "string"
+            },
+            "from": {
+              "description": "Data od (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "to": {
+              "description": "Data do (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "limit": {
+              "default": 200,
+              "description": "Maksymalna liczba wpisów.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_notes",
+        "title": "Notatki zdrowotne",
+        "description": "Notatki zdrowotne i medyczne użytkownika z datami.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "search": {
+              "description": "Fraza wyszukiwana w tytule i treści.",
+              "type": "string"
+            },
+            "limit": {
+              "default": 50,
+              "description": "Maksymalna liczba notatek.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_progress_photos",
+        "title": "Zdjęcia postępów",
+        "description": "Zwraca zdjęcia sylwetki z datami i podpisami wraz z tymczasowymi (1 h) linkami do pobrania, które można otworzyć i przeanalizować wizualnie.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "from": {
+              "description": "Data od (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "to": {
+              "description": "Data do (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "limit": {
+              "default": 12,
+              "description": "Maksymalna liczba zdjęć.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_medical_exams",
+        "title": "Badania lekarskie",
+        "description": "Zwraca badania lekarskie: datę, kategorię, nazwę i pełny opis wyników wraz z tymczasowymi (1 h) linkami do załączonych plików (PDF, zdjęcia), które można otworzyć i przeanalizować.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "from": {
+              "description": "Data od (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "to": {
+              "description": "Data do (YYYY-MM-DD).",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "limit": {
+              "default": 50,
+              "description": "Maksymalna liczba badań.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "add_note",
+        "title": "Dodaj notatkę",
+        "description": "Zapisuje nową notatkę zdrowotną (np. wnioski z analizy) w dzienniku zalogowanego użytkownika.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Tytuł notatki."
+            },
+            "content": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Treść notatki."
+            },
+            "note_date": {
+              "description": "Data notatki (YYYY-MM-DD); domyślnie dzisiaj.",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "category": {
+              "description": "Kategoria, np. 'analiza', 'zdrowie'.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "title",
+            "content"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
