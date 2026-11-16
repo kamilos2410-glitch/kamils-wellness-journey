@@ -132,7 +132,7 @@ function ImportPage() {
     <div className="space-y-4">
       <PageHeader
         title="Import"
-        subtitle="Wgraj plik .xlsx lub .csv (np. arkusz „Dieta Kamil Pietraszko”) i przenieś historię pomiarów"
+        subtitle="Wgraj plik .xlsx lub .csv (np. arkusz „Pomiary – historia”) i przenieś historię pomiarów"
       />
 
       <Card>
