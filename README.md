@@ -1,26 +1,43 @@
-# forma-health-tracker
+# Forma – personal health & training journal
 
-Chcę stworzyć aplikację która pozwoli mi zapisywać moje wszystkie kwestie związane z zdrowiem, planami treningowymi, dieta, postępami itp. Najlepiej gdyby uzupełniały się automatycznie. Najważniejsza rzecz to exel w moich @connector:google_sheets:"Google Sheets" Pod nazwą Dieta Kamil Pietraszko. Sprawdź co tam się znajduje i uwzględnij wszystko. Dodatkowo w notatkach na iPhone zapisuje obecne plany dietetyczne a chce w aplikacji, w Fitatu zapisuje wszystkie kalorie i chciałbym aby było tam miejsce do wstawiania raportów automatycznie z Fitatu (jeśli nie da się automatycznie to bez miejsca na wstawianie raportów z Fitatu), plan treningowy w formie tekstowej z datą rozpoczęcia, oraz miejsce na zdjęcia (kilka zdjęć co jakiś czas) z datą z możliwością wstawienia historycznych zdjęć oraz innych danych takich jak tych z @connector:google_sheets:"Google Sheets" oraz notatek.
+Forma is a web app I built for my own use. It keeps diet, calorie tracking, training, body measurements, progress photos and medical test results in one place, instead of spread across several apps, phone notes and spreadsheets.
 
-This project was built with [Lovable](https://lovable.dev).
+Anyone can create an account and use it with their own data. Every account sees only its own entries.
 
-**Live app**: https://kamils-wellness-journey.lovable.app
+## Features
 
-## Build with Lovable
+- **Daily dashboard** – today's calorie and macro targets (different for training and rest days), what has been eaten so far, the latest weight and the active training plan.
+- **Diet plans** – macro targets for training and rest days, with a meal plan for each.
+- **Fitatu import** – upload a screenshot from the Fitatu app and the calories and macros are read automatically by an AI vision model. A text report can be pasted instead.
+- **Training** – text-based training plans and a session log. Exports from the Strong app can be pasted in and are parsed into exercises and sets.
+- **Measurements** – weight, body circumferences, skinfold, sleep, steps and energy, with history, change over time and charts. Past data can be imported from an .xlsx or .csv file.
+- **Progress photos** – grouped by date and tagged by angle and pose, including older photos.
+- **Notes and medical results** – health notes and lab results with PDF or image attachments.
+- **AI-readable report** – a private, read-only link that exposes the user's data as JSON, so an AI assistant such as ChatGPT can analyse it.
+- Installable on the phone home screen (PWA).
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/3f68dc5b-c29a-48e2-a82f-702ac70a30f6).
+## Tech stack
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- TanStack Start (React 19, TypeScript, file-based routing, server functions)
+- Tailwind CSS and shadcn/ui
+- Supabase: PostgreSQL, Auth (email and Google sign-in), Storage
+- Row-level security on every table and storage bucket, so each user can only read and write their own rows and files
+- Recharts for charts, SheetJS for spreadsheet import, Zod for validation
+- Built with AI-assisted development in Lovable
 
-## Development
+## Running locally
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Requires Node.js 20+ and a Supabase project.
 
 ```sh
 git clone <this-repository-url>
 cd <repository-name>
-npm i
+npm install
 npm run dev
 ```
+
+Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in `.env`, then apply the SQL migrations from `supabase/migrations`.
+
+## Author
+
+Kamil Pietraszko
