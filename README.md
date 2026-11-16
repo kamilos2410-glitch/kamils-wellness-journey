@@ -2,6 +2,8 @@
 
 Forma is a web app I built for my own use. It keeps diet, calorie tracking, training, body measurements, progress photos and medical test results in one place, instead of spread across several apps, phone notes and spreadsheets.
 
+**Live demo:** https://forma-health-tracker.lovable.app – sign in with the demo account `demo@example.com` / `FormaDemo2026`, or create your own account.
+
 Anyone can create an account and use it with their own data. Every account sees only its own entries.
 
 ## Features
