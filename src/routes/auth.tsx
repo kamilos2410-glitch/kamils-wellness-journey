@@ -140,6 +140,26 @@ function AuthPage() {
             Kontynuuj z Google
           </Button>
 
+          <div className="rounded-md bg-primary/10 px-3 py-2 text-center text-xs text-primary">
+            <p>
+              Chcesz tylko obejrzeć aplikację? Konto demo: demo@example.com /
+              FormaDemo2026
+            </p>
+            <Button
+              type="button"
+              variant="link"
+              size="sm"
+              className="h-auto p-0 text-xs"
+              onClick={() => {
+                setMode("login");
+                setEmail("demo@example.com");
+                setPassword("FormaDemo2026");
+              }}
+            >
+              Wypełnij dane demo
+            </Button>
+          </div>
+
           <button
             type="button"
             className="w-full text-center text-xs text-muted-foreground hover:text-foreground"
