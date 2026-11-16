@@ -22,7 +22,7 @@ function findValue(text: string, patterns: RegExp[]): number | null {
 }
 
 /**
- * Parsuje wklejony raport z Fitatu (lub notatkę w stylu "3030 kcal / B200 / T70 / W400").
+ * Parsuje wklejony raport z Fitatu (lub notatkę w stylu "2450 kcal / B180 / T70 / W300").
  */
 export function parseFitatuReport(input: string): ParsedFitatu {
   const text = input.replace(/\u00a0/g, " ");

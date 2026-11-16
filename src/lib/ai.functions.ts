@@ -54,7 +54,7 @@ export const parseFitatuScreenshot = createServerFn({ method: "POST" })
                 type: "text",
                 text: `Odczytaj dane z tego zrzutu ekranu Fitatu i zwróć JSON o strukturze:
 {"date":"YYYY-MM-DD lub null","kcal":liczba,"protein":liczba,"fat":liczba,"carbs":liczba,"goal_kcal":liczba,"goal_protein":liczba,"goal_fat":liczba,"goal_carbs":liczba,"meals":[{"name":"Śniadanie","kcal":liczba,"protein":liczba,"fat":liczba,"carbs":liczba}]}
-Zasady: wartości spożyte to liczby przed ukośnikiem (np. "Kcal 3034 /3936" => kcal 3034, goal_kcal 3936). Kolumny przy posiłkach to kolejno B (białko), T (tłuszcz), W (węglowodany). Brakujące wartości ustaw na null.
+Zasady: wartości spożyte to liczby przed ukośnikiem (np. "Kcal 2450 /2800" => kcal 2450, goal_kcal 2800). Kolumny przy posiłkach to kolejno B (białko), T (tłuszcz), W (węglowodany). Brakujące wartości ustaw na null.
 DATA: u góry jest pasek dni tygodnia z numerami. Wybrany (oglądany) dzień to ten w WYPEŁNIONYM CIEMNYM/CZARNYM KÓŁKU — użyj właśnie jego numeru. NIE bierz dnia zaznaczonego jasnym/białym tłem ani zegara w statusbarze (to dzisiejsza data). Miesiąc i rok wywnioskuj z układu dni tygodnia (litery P W Ś C P S N) względem dzisiejszej daty ${new Date().toISOString().slice(0, 10)}; wybrany dzień jest zwykle dzisiaj lub wcześniej. Jeśli nie da się jednoznacznie ustalić – null.
 Nie dodawaj żadnego tekstu poza JSON.`,
               },

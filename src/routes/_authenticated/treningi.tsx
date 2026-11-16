@@ -159,7 +159,7 @@ function Treningi() {
               rows={8}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder={"Wakacje Hotel B\n\nBulgarian Split Squat\nSet 1: 6 kg × 10..."}
+              placeholder={"Push A\n\nBulgarian Split Squat\nSet 1: 6 kg × 10..."}
             />
           </div>
 
@@ -220,7 +220,7 @@ function Treningi() {
               rows={6}
               value={sessionNotes}
               onChange={(e) => setSessionNotes(e.target.value)}
-              placeholder={"Wakacje Hotel B\nTuesday, 11 August 2026 at 07:50\n\nBulgarian Split Squat\nSet 1: 6 kg × 10..."}
+              placeholder={"Push A\nMonday, 2 March 2026 at 18:00\n\nBulgarian Split Squat\nSet 1: 6 kg × 10..."}
             />
           </div>
 
